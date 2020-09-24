@@ -1,17 +1,27 @@
 #pragma once
-#include<Windows.h>
-#include<string>
-#include<iostream>
-namespace ColorConsole {
+#include <Windows.h>
+#include <string>
+#include <iostream>
+namespace ColorConsole
+{
 	/**
-	 * @brief Í¨¹ı¹¹Ôìº¯ÊıÉèÖÃrbgÑÕÉ«
-	 *		  ÈçºìÉ«ÎªConsoleColor(1,0,0),ÇàÉ«ÎªConsoleColor(0,1,1)
+	 * @brief é€šè¿‡æ„é€ å‡½æ•°è®¾ç½®rbgé¢œè‰²
+	 *		  å¦‚çº¢è‰²ä¸ºConsoleColor(1,0,0),é’è‰²ä¸ºConsoleColor(0,1,1)
 	*/
 	class ConsoleColor
 	{
 	private:
 		WORD _color = 0;
+
 	public:
+		/**
+		* @brief é€šè¿‡æ„é€ å‡½æ•°è®¾ç½®rbgé¢œè‰²ã€‚
+		*		 win32apiåªæ”¯æŒ8ä½é¢œè‰²ï¼Œæ‰€ä»¥ä½¿ç”¨boolè¾“å…¥å‚æ•°
+		* 
+		* @param needRed çº¢è‰²
+		* @param needGreen ç»¿è‰²
+		* @param needBlue è“è‰²
+		*/
 		ConsoleColor(bool needRed, bool needGreen, bool needBlue)
 		{
 			_color = ((WORD)needRed) << 2 | ((WORD)needGreen) << 1 | ((WORD)needBlue);
@@ -22,42 +32,43 @@ namespace ColorConsole {
 		}
 	};
 	/**
-	 * @brief ½«¿ØÖÆÌ¨ÑÕÉ«ÖØÖÃÎªºÚµ×°××Ö
+	 * @brief å°†æ§åˆ¶å°é¢œè‰²é‡ç½®ä¸ºé»‘åº•ç™½å­—
 	*/
 	void DefaultConsoleColor()
 	{
 		SetConsoleTextAttribute(
 			GetStdHandle(STD_OUTPUT_HANDLE),
-			ConsoleColor(1, 1, 1).GetWORDColor() | ConsoleColor(0, 0, 0).GetWORDColor() << 4
-		);
+			ConsoleColor(1, 1, 1).GetWORDColor() | ConsoleColor(0, 0, 0).GetWORDColor() << 4);
 	}
 	/**
-	 * @brief ¿ØÖÆÌ¨Êä³ö²ÊÉ«ÎÄ×ÖºÍ±³¾°
-	 * @param text ĞèÒªÊä³öµÄÎÄ×Ö
-	 * @param foregroundColor ×ÖÌåÑÕÉ«
-	 * @param backgroundColor ±³¾°ÑÕÉ«
+	 * @brief æ§åˆ¶å°è¾“å‡ºå½©è‰²æ–‡å­—å’ŒèƒŒæ™¯
+	 * 
+	 * @param text éœ€è¦è¾“å‡ºçš„æ–‡å­—
+	 * @param foregroundColor å­—ä½“é¢œè‰²
+	 * @param backgroundColor èƒŒæ™¯é¢œè‰²
 	*/
 	void ColorPrintA(std::string text, ConsoleColor foregroundColor, ConsoleColor backgroundColor)
 	{
+		// ä¿®æ”¹é¢œè‰²
 		SetConsoleTextAttribute(
 			GetStdHandle(STD_OUTPUT_HANDLE),
-			foregroundColor.GetWORDColor() | backgroundColor.GetWORDColor() << 4
-		);
+			foregroundColor.GetWORDColor() | backgroundColor.GetWORDColor() << 4);
 		std::cout << text;
+		// é‡ç½®ä¸ºé»‘åº•ç™½å­—é¢œè‰²
 		DefaultConsoleColor();
 	}
 	/**
-	 * @brief ColorPrintAµÄUnicode°æ±¾
-	 * @param text ĞèÒªÊä³öµÄÎÄ×Ö
-	 * @param foregroundColor ×ÖÌåÑÕÉ«
-	 * @param backgroundColor ±³¾°ÑÕÉ«
+	 * @brief ColorPrintAçš„Unicodeç‰ˆæœ¬
+	 * 
+	 * @param text éœ€è¦è¾“å‡ºçš„æ–‡å­—
+	 * @param foregroundColor å­—ä½“é¢œè‰²
+	 * @param backgroundColor èƒŒæ™¯é¢œè‰²
 	*/
 	void ColorPrintW(std::wstring text, ConsoleColor foregroundColor, ConsoleColor backgroundColor)
 	{
 		SetConsoleTextAttribute(
 			GetStdHandle(STD_OUTPUT_HANDLE),
-			foregroundColor.GetWORDColor() | backgroundColor.GetWORDColor() << 4
-		);
+			foregroundColor.GetWORDColor() | backgroundColor.GetWORDColor() << 4);
 		std::wcout << text;
 		DefaultConsoleColor();
 	}
@@ -65,6 +76,5 @@ namespace ColorConsole {
 #define ColorPrint ColorPrintW
 #else
 #define ColorPrint ColorPrintA
-#endif // DEBUG
-}
-
+#endif
+} // namespace ColorConsole

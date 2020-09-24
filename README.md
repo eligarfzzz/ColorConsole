@@ -1,4 +1,4 @@
-# ConsoleColor C++彩色控制台输出
+# ColorConsole C++彩色控制台输出
 
 对win32api的简单封装
 

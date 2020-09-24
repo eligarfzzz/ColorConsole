@@ -10,13 +10,13 @@ namespace ColorConsole {
 	class ConsoleColor
 	{
 	private:
-		DWORD _color = 0;
+		WORD _color = 0;
 	public:
 		ConsoleColor(bool needRed, bool needGreen, bool needBlue)
 		{
-			_color = ((DWORD)needRed) << 2 | ((DWORD)needGreen) << 1 | ((DWORD)needBlue);
+			_color = ((WORD)needRed) << 2 | ((WORD)needGreen) << 1 | ((WORD)needBlue);
 		}
-		DWORD GetDWORDColor()
+		WORD GetWORDColor()
 		{
 			return _color;
 		}
@@ -28,7 +28,7 @@ namespace ColorConsole {
 	{
 		SetConsoleTextAttribute(
 			GetStdHandle(STD_OUTPUT_HANDLE),
-			ConsoleColor(1, 1, 1).GetDWORDColor() | ConsoleColor(0, 0, 0).GetDWORDColor() << 4
+			ConsoleColor(1, 1, 1).GetWORDColor() | ConsoleColor(0, 0, 0).GetWORDColor() << 4
 		);
 	}
 	/**
@@ -41,7 +41,7 @@ namespace ColorConsole {
 	{
 		SetConsoleTextAttribute(
 			GetStdHandle(STD_OUTPUT_HANDLE),
-			foregroundColor.GetDWORDColor() | backgroundColor.GetDWORDColor() << 4
+			foregroundColor.GetWORDColor() | backgroundColor.GetWORDColor() << 4
 		);
 		std::cout << text;
 		DefaultConsoleColor();
@@ -56,7 +56,7 @@ namespace ColorConsole {
 	{
 		SetConsoleTextAttribute(
 			GetStdHandle(STD_OUTPUT_HANDLE),
-			foregroundColor.GetDWORDColor() | backgroundColor.GetDWORDColor() << 4
+			foregroundColor.GetWORDColor() | backgroundColor.GetWORDColor() << 4
 		);
 		std::wcout << text;
 		DefaultConsoleColor();

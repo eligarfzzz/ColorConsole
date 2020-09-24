@@ -1,5 +1,7 @@
 # ConsoleColor C++彩色控制台输出
 
+对win32api的简单封装
+
 ## 安装
 
 引入头文件即可

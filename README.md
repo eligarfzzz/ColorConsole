@@ -16,8 +16,8 @@
 #include "ColorConsole.h"
 int main()
 {
-    using namespace ColorConsole;
-    //ConsoleColor参数顺序为RGB，win32api只支持8位色彩
+	using namespace ColorConsole;
+	// ConsoleColor参数顺序为RGB，win32api只支持8位色彩
 	ColorPrintA("ERROR :\t", ConsoleColor(1, 1, 1), ConsoleColor(1, 0, 0));
 	ColorPrintA("error text\n", ConsoleColor(1, 1, 1), ConsoleColor(0, 0, 0));
 	ColorPrintA("WARNING:\t", ConsoleColor(0, 0, 0), ConsoleColor(1, 1, 0));
